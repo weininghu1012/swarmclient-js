@@ -45,6 +45,10 @@ const connect = (addr, id) => {
 
 const onMessage = (event, socket) => {
 
+    console.log(`\n******* RECEIVING *******`);
+    console.dir(event);
+    console.log(`******* RECEIVING *******\n`);
+
     const request = messages.get(event['request-id']);
     const resolver = resolvers.get(event['request-id']);
 
@@ -119,6 +123,11 @@ const amendRequestID = (() => {
 const send = (obj, resolver) => {
 
     const message = amendUuid(uuid , amendRequestID(obj));
+
+    console.log(`\n******* SENDING *******`);
+    console.dir(message);
+    console.log(`******* SENDING *******\n`);
+
     resolvers.set(message['request-id'], resolver);
     messages.set(message['request-id'], message);
 
